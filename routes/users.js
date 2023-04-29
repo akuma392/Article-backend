@@ -38,6 +38,12 @@ router.post("/login", async (req, res, next) => {
         error: "Invalid password",
       });
     }
+    if (user?.isBlock) {
+      return res.status(400).json({
+        error:
+          "Your are blocked by Admin. Please contact admin to perform this operation",
+      });
+    }
     // generate token
     var token = await user.signToken();
     res.json({ user: user.userJSON(token) });

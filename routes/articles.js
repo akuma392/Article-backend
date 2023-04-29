@@ -37,7 +37,7 @@ router.get("/:id/delete", (req, res, next) => {
   let id = req.params.id;
   Article.findByIdAndDelete(id, (err, deletedItem) => {
     if (err) next(err);
-    res.redirect("/api/articles");
+    res.json(deletedItem);
   });
 });
 
